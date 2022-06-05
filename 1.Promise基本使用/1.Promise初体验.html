@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="page-header">Promise 初体验</h2>
+      <button class="btn btn-primary" id="btn">点击抽奖</button>
+    </div>
+
+    <script>
+      //生成随机数
+      function rand(m, n) {
+        return Math.ceil(Math.random() * (n - m + 1)) + m - 1
+      }
+
+      // const btn = document.querySelector('#btn')
+
+      btn.addEventListener('click', function () {
+        //   setTimeout(() => {
+        //     let n = rand(1, 100)
+        //     console.log(n)
+        //     if (n <= 30) {
+        //       alert('中奖咯')
+        //     } else {
+        //       alert('没中奖')
+        //     }
+        //   }, 1000)
+        // })
+
+        //Promise 形式实现
+        //resolve 解决
+        //reject 拒绝
+        const p = new Promise((resolve, reject) => {
+          setTimeout(() => {
+            let n = rand(1, 100)
+
+            if (n <= 30) {
+              resolve(n) //可以将promise对象状态设置为成功
+            } else {
+              reject(n) //可以将promise对象状态设置为失败
+            }
+          }, 1000)
+        })
+        //调用then 方法
+        //value 值
+        //reason 理由
+        p.then(
+          (value) => {
+            alert('中奖咯' + value)
+          },
+          (reason) => {
+            alert('没中奖' + reason)
+          }
+        )
+      })
+    </script>
+  </body>
+</html>
